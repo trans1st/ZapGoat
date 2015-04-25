@@ -1,39 +1,57 @@
 public class PowerPlant {
 
-    private int number,
+    protected int number,
     //The number on the card. Determines the minimum bid at auction and obsolescence
 
     resourceConsumption,
     //Resources needed to operate. Determines resource capacity
 
-    powerOutput;
+    powerOutput,
     //Power generated in operation
 
-    private String resourceType;
-    //Type of resource it burns
+    resourceType;
+    //Type of resource it burns. 0=coal, 1=oil, 2=garbage, 3=uranium, 4=hybrid, 5=green;
 
 
     public PowerPlant() {
 
     }
-
-    public int generate(int numberAvailable, String resourceName) {
-        return powerOutput;
+    
+    public PowerPlant(int plantNumber, int plantConsumption, int plantOutput, int plantType){
+    	
     }
 
-    public int getNumber() {
+    public final int generate(ResourceStack fuel) {
+    	if (resourceType == 5) {
+    		return powerOutput;
+    	}
+    	else if (resourceType == 4) {
+    		//Need some way to decide what kind of fuel to burn in a hybrid situation
+    		System.out.println("Bad generation");
+    		return powerOutput;
+    	}
+    	else if (fuel.getQuantity(resourceType) <= resourceConsumption) {
+    		fuel.changeQuantity(resourceConsumption, resourceType);
+    		return powerOutput;
+    	}
+    	else {
+    		return 0;
+    	}
+    }
+
+    public final int getNumber() {
         return number;
     }
 
-    public int getResourceConsumption() {
+    public final int getResourceConsumption() {
         return resourceConsumption;
     }
 
-    public int getPowerOutput() {
+    public final int getPowerOutput() {
         return powerOutput;
     }
 
-    public String getResourceType () {
+    public final int getResourceType () {
         return resourceType;
     }
 

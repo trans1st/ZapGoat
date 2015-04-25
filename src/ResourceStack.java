@@ -58,15 +58,6 @@ public class ResourceStack {
         }
         else return 0;
     }
-
-    public void changeQuantity(int change, int type){
-        if (quantity[type] + change <= costProgression.length) {
-            quantity[type] += change;
-        }
-        else {
-            quantity = costProgression.length;
-        }
-    }
     */
 
     public int getQuantity(int type) {
@@ -76,10 +67,25 @@ public class ResourceStack {
     public void changeQuantity(int[] change) {
         for (int i = 0; i < 3; i++) {
             quantity[i] += change[i];
-            if (quantity[i] > maximum[i]) {
+        }
+        ensureReasonableQuantity();
+    }
+    
+    public void changeQuantity(int change, int type) {
+    	quantity[type] += change;
+    	ensureReasonableQuantity();
+    }
+    
+    private void ensureReasonableQuantity() {
+    	//Makes sure the quantity never goes above the maximum nor below zero
+    	for (int i = 0; i < 3; i++) {
+    		if (quantity[i] > maximum[i]) {
                 quantity[i] = maximum[i];
             }
-        }
+            else if (quantity[i] < 0) {
+            	quantity[i] = 0;
+            }
+    	}
     }
 
     public int[] getQuantity() {

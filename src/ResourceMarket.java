@@ -36,8 +36,8 @@ public class ResourceMarket {
 
     public void update() {
         //Updates the resource market at the end of phase 5
-        int numPlayers = ZapGoat.gameBoard.getNumPlayers();
-        int step = ZapGoat.gameBoard.getStep();
+        int numPlayers = ZapGoat.getBoard().getNumPlayers();
+        int step = ZapGoat.getBoard().getStep();
         marketResources.changeQuantity(replenishRate[numPlayers][step]);
     }
 
