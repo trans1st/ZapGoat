@@ -1,13 +1,13 @@
 
 public class City {
 	private String name,
-				   regionName;
+				   region;
 	private City[] connections;
 	private int[] connectionCosts;
 	
-	public City(String cityName, String region) {
-		name = cityName;
-		regionName = region;
+	public City(String name, String region) {
+		this.name = name;
+		this.region = region;
 	}
 	
 	public void addNeighbors(City[] neighborCities, int[] neighborCosts) {
